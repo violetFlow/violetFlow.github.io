@@ -1,0 +1,34 @@
+---
+layout: post
+title: "sequelizeのバインドパラメータにSQL構文を入れたら、データ取得に失敗した"
+date:  2023-03-17 14:00:05 +0900
+---
+
+# 問題
+sequelizeで下記のようなRawクエリでデータ取得しようとしたが失敗した。
+```javascript
+const { QueryTypes } = require('sequelize');
+
+const query = `
+    SELECT 
+    FROM tests 
+    WHERE status in ( $status )
+`
+await sequelize.query(
+  query,
+  {
+    bind: { status: "'1','2','3'" },
+    type: QueryTypes.SELECT
+  }
+);
+```
+
+# 原因
+> クエリがデータベースに送信される前に、sequelizeによってreplacementsがエスケープされてクエリに挿入されますが、バインドパラメーターはSQLクエリテキストの外部でデータベースに送信されます。
+
+bindパラメータにはSQLクエリの構文を入れないようにする必要がある。
+# 対応
+bindの代わりにreplacementsを使用した。
+
+# 参考
+[Raw Queries](https://sequelize.org/docs/v6/core-concepts/raw-queries/)
