@@ -1,0 +1,15 @@
+---
+layout: post
+title: "Docker subnet 範囲外のipv4指定エラー"
+date:  2023-03-17 12:29:05 +0900
+---
+
+# 問題
+Invalid address. It does not belong to any of this network's subnets
+
+# 原因
+自分で作ったdockerのmy_networkのsubnetは`10.11.0.0/16`だけど、
+docker-compose.ymlのdocker-postgreの固定ipを`192.168.1.2`にしてしまった。
+
+# 対応
+固定ipを`10.11.0.3`に変えた
