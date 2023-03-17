@@ -1,0 +1,7 @@
+---
+layout: post
+title:  "my first post"
+date:   2023-03-17 10:16:05 +0900
+---
+
+my first post... i want to making blog articles.
