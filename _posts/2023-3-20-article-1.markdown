@@ -1,0 +1,24 @@
+---
+layout: post
+title:  "ChromeでRefererを確認する"
+date:   2023-03-20 17:00:05 +0900
+---
+
+# 問題
+ChromeでRefererを確認できない。
+
+# 原因
+ChromeでRefererを確認する方法がわからない。
+
+# 対応
+ChromeでRefererを確認する方法を調べる。
+
+# 調査結果
+1. 任意のサイトを訪問する。
+2. Chromeの開発者ツールを立ち上げる。
+3. networkタブを開き、cmd + r（Macの場合）を押下する。
+4. 受送信されたhtmlをクリックする。
+5. ヘッダータブ / リクエストヘッダー / refererを確認する。
+
+# 参考
+[Google ChromeでHTTPヘッダー情報を確認する方法](https://smakoma.com/http-header-chrome.html)
