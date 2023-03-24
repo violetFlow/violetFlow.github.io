@@ -1,0 +1,23 @@
+---
+layout: post
+title:  "vimのbufferを全クリアコマンド"
+date:   2023-03-24 15:59:05 +0900
+---
+# 問題
+vimのbufferを全部クリアできない。
+
+# 原因
+vimのbufferを全部クリアするコマンドを知らない。
+
+# 対応
+vimのbufferを全部クリアするコマンドを調べる。
+
+# 調査結果
+
+```bash
+# vim cliで下記のコマンドを入力する
+bufdo bd
+```
+
+# 参考
+[vim-close-all-buffers-but-this-one](https://stackoverflow.com/questions/4545275/vim-close-all-buffers-but-this-one)
