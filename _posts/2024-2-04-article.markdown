@@ -1,0 +1,43 @@
+---
+layout: post
+title: "nvim-dapを利用したデバックのトラブルシューティング"
+date:  2023-03-17 12:29:05 +0900
+---
+
+# 問題
+Neovimでnodejsデバック環境構築時に設定を終えたにもかかわらず、
+Neovimの中いくらブレークポイントを設定しても設定箇所で止まらなかった。
+
+# 原因
+nodeコマンドでサーバーを実行した後にNeovimでそのデバックセッションをアタッチしなければならないのに
+ずっとNeovim側でデバックセッションを起動しようとしていた。
+
+# 対応
+1. nodeのサーバーをinspectで起動させる
+
+```bash
+~/work/nvim-dap-test-server » node --inspect server.js                                                                                                  junhapark@JunhanoMBP
+Debugger listening on ws://127.0.0.1:9229/70410565-7681-4b16-9a6d-1c99ad740dbd <--debugger session
+For help, see: https://nodejs.org/en/docs/inspector
+Server running at http://127.0.0.1:3000/
+
+```
+
+2. Neovimでデバックセッションをアタッチする
+F5をクリックして2:attachを押す。
+そして、Gコマンドで最後の行まで行き、Enterを押す。
+そうしたら、下記のようにデバックセッションにアタッチできる。
+
+```bash
+Debugger listening on ws://127.0.0.1:9229/70410565-7681-4b16-9a6d-1c99ad740dbd
+For help, see: https://nodejs.org/en/docs/inspector                          
+Server running at http://127.0.0.1:3000/
+Debugger attached.
+``` 
+
+3. そして、browerでブレークポイントを指定したAPIを呼ぶとブレークポイントで止まる。
+
+# 参考
+[nvim-dap](https://github.com/mfussenegger/nvim-dap?tab=readme-ov-file)
+[node debugger](https://nodejs.org/en/guides/debugging-getting-started)
+[Neovim プラグイン: nvim-dap](https://www.youtube.com/watch?v=ga3Cas7vNCk)
